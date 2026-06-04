@@ -1,5 +1,5 @@
 {
-    "name": "extension-roversaigotchi",
+    "name": "pxt-roversaigotchi",
     "description": "",
     "dependencies": {
         "core": "*",
