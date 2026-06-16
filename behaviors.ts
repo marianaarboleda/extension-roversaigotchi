@@ -1,27 +1,27 @@
 /**
  * Roversaigotchi – pet behaviors, background loop, and event hooks.
  *
- * The shake gesture and radio receiver are registered here at startup.
+ * The turn upside down gesture and radio receiver are registered here at startup.
  * Each behavior sets _busy = true while it runs so the background
  * display loop pauses automatically without any extra wiring.
  */
 namespace roversaigotchi {
 
     // Custom event handlers – students can override defaults with
-    // onCustomShake() and onFriendNearby() blocks.
-    let _shakeHandler: (() => void) | null = null
+    // onCustomWake() and onFriendNearby() blocks.
+    let _wakeHandler: (() => void) | null = null
     let _friendHandler: (() => void) | null = null
     let _radioTick = 0
 
     // ── Startup registrations ─────────────────────────────────────────────────
 
-    // Shake: wake the pet if asleep, otherwise run the default angry reaction
+    // Turn upside down: wake the pet if asleep, otherwise run the default angry reaction
     // (or a custom handler if the student provided one).
-    input.onGesture(Gesture.Shake, function () {
+    input.onGesture(Gesture.ScreenDown, function () {
         if (_sleeping) {
             _sleeping = false          // interrupts the lullaby loop in goSleep()
-        } else if (_shakeHandler) {
-            _shakeHandler()
+        } else if (_wakeHandler) {
+            _wakeHandler()
         } else {
             // Default: angry reaction
             music.play(
@@ -128,7 +128,7 @@ namespace roversaigotchi {
 
     /**
      * Put the pet to sleep. Plays a lullaby on loop until the
-     * micro:bit is shaken, then plays the wake-up animation.
+     * micro:bit is turned upside down, then plays the wake-up animation.
      */
     //% block="go to sleep"
     //% weight=90
@@ -150,7 +150,7 @@ namespace roversaigotchi {
             roversa.stop()
         }
 
-        // Lullaby loops until shake sets _sleeping = false
+        // Lullaby loops until turn upside down sets _sleeping = false
         while (_sleeping) {
             _playLullaby()
         }
@@ -240,14 +240,14 @@ namespace roversaigotchi {
     // ── Event hooks ───────────────────────────────────────────────────────────
 
     /**
-     * Run custom code when the micro:bit is shaken (and the pet is not asleep).
+     * Run custom code when the micro:bit is turned upside down (and the pet is not asleep).
      * Replaces the default angry reaction.
      */
-    //% block="on shake"
+    //% block="on wake"
     //% weight=90
     //% group="Events"
-    export function onCustomShake(handler: () => void): void {
-        _shakeHandler = handler
+    export function onCustomWake(handler: () => void): void {
+        _wakeHandler = handler
     }
 
     /**
