@@ -86,12 +86,6 @@ namespace roversaigotchi {
 
     // ── Display ───────────────────────────────────────────────────────────────
 
-    /**
-     * Show the pet's face based on its current wellbeing level.
-     */
-    //% block="show pet face"
-    //% weight=60
-    //% group="Behaviors"
     export function showFace(): void {
         if (_wellbeing < 50) {
             basic.showIcon(IconNames.Angry)
@@ -115,7 +109,7 @@ namespace roversaigotchi {
      */
     //% block="show wellbeing stats"
     //% weight=50
-    //% group="Behaviors"
+    //% group="Wellbeing"
     export function showStats(): void {
         _busy = true
         led.plotBarGraph(_wellbeing, 100)

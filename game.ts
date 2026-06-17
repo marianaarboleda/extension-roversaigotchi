@@ -44,7 +44,9 @@ namespace roversaigotchi {
     //% block="play obstacle game"
     //% weight=70
     //% group="Behaviors"
-    export function playGame(): void {
+    //% effect_win_level.defl=1
+    //% effect_lose.defl=-10
+    export function playGame(effect_win_level = 1, effect_lose = -10): void {
         _busy = true
         _gameRunning = true
         _birdX = 2
@@ -62,10 +64,10 @@ namespace roversaigotchi {
                     _gameRunning = false
                     basic.clearScreen()
                     basic.showString("GAME OVER")
-                    changeWellbeing(-10)
+                    changeWellbeing(effect_lose)
                 } else {
                     // Survived this wave – spawn next
-                    changeWellbeing(1)
+                    changeWellbeing(effect_win_level)
                     _obstacleY = 4
                     _gapX = randint(0, 4)
                 }
