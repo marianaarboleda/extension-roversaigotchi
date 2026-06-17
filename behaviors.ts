@@ -260,50 +260,14 @@ namespace roversaigotchi {
     // ── Private helpers ───────────────────────────────────────────────────────
 
     export function _playLullaby(): void {
-        for (let i = 0; i < 2; i++) {
-            music.playTone(330, music.beat(BeatFraction.Quarter))
-            music.rest(music.beat(BeatFraction.Quarter))
-            music.playTone(330, music.beat(BeatFraction.Quarter))
-            music.rest(music.beat(BeatFraction.Quarter))
-            music.playTone(392, music.beat(BeatFraction.Whole))
-            music.rest(music.beat(BeatFraction.Whole))
-        }
-        music.playTone(330, music.beat(BeatFraction.Quarter))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(392, music.beat(BeatFraction.Quarter))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(523, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Half))
-        music.playTone(494, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Half))
-        music.playTone(440, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Half))
-        music.playTone(440, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Half))
-        music.playTone(392, music.beat(BeatFraction.Whole))
-        for (let i = 0; i < 2; i++) {
-            music.playTone(294, music.beat(BeatFraction.Quarter))
-            music.rest(music.beat(BeatFraction.Quarter))
-            music.playTone(330, music.beat(BeatFraction.Quarter))
-            music.rest(music.beat(BeatFraction.Quarter))
-            music.playTone(349, music.beat(BeatFraction.Half))
-            music.rest(music.beat(BeatFraction.Half))
-            music.play(
-                music.tonePlayable(294, music.beat(BeatFraction.Half)),
-                music.PlaybackMode.UntilDone
-            )
-            music.rest(music.beat(BeatFraction.Half))
-        }
-        music.playTone(349, music.beat(BeatFraction.Quarter))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(494, music.beat(BeatFraction.Quarter))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(440, music.beat(BeatFraction.Quarter))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(392, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Half))
-        music.playTone(494, music.beat(BeatFraction.Half))
-        music.rest(music.beat(BeatFraction.Quarter))
-        music.playTone(523, music.beat(BeatFraction.Double))
+        music.playMelody(
+            "E4:1 -:1 E4:1 -:1 G4:4 -:4 " +
+            "E4:1 -:1 E4:1 -:1 G4:4 -:4 " +
+            "E4:1 -:1 G4:1 -:1 C5:2 -:2 B4:2 -:2 A4:2 -:2 A4:2 -:2 G4:4 " +
+            "D4:1 -:1 E4:1 -:1 F4:2 -:2 D4:2 -:2 " +
+            "D4:1 -:1 E4:1 -:1 F4:2 -:2 D4:2 -:2 " +
+            "F4:1 -:1 B4:1 -:1 A4:1 -:1 G4:2 -:2 B4:2 -:1 C5:4",
+            100
+        )
     }
 }
