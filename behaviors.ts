@@ -130,10 +130,11 @@ namespace roversaigotchi {
      * Put the pet to sleep. Plays a lullaby on loop until the
      * micro:bit is turned upside down, then plays the wake-up animation.
      */
-    //% block="go to sleep"
+    //% block="go to sleep || with effect %effect"
     //% weight=90
     //% group="Behaviors"
-    export function goSleep(): void {
+    //% effect.defl=20
+    export function goSleep(effect = 20): void {
         _busy = true
         _sleeping = true
         basic.showIcon(IconNames.Asleep)
@@ -166,16 +167,18 @@ namespace roversaigotchi {
             basic.showIcon(IconNames.Asleep)
         }
 
+        changeWellbeing(effect)
         _busy = false
     }
 
     /**
-     * Take the pet for a run. Moves randomly and boosts wellbeing.
+     * Take the pet for a run. Moves randomly and affects wellbeing.
      */
-    //% block="go for a run"
+    //% block="go for a run || with effect %effect"
     //% weight=80
     //% group="Behaviors"
-    export function goRun(): void {
+    //% effect.defl=10
+    export function goRun(effect = 10): void {
         _busy = true
 
         for (let i = 0; i < 2; i++) {
@@ -208,17 +211,18 @@ namespace roversaigotchi {
             basic.pause(100)
         }
 
-        changeWellbeing(10)
+        changeWellbeing(effect)
         _busy = false
     }
 
     /**
-     * Send a message to a friend. Plays a ringtone and boosts wellbeing.
+     * Send a message to a friend. Plays a ringtone and affects wellbeing.
      */
-    //% block="text a friend"
+    //% block="text a friend || with effect %effect"
     //% weight=75
     //% group="Behaviors"
-    export function textFriend(): void {
+    //% effect.defl=15
+    export function textFriend(effect = 15): void {
         _busy = true
         music.setVolume(255)
         basic.showString("Hello!")
@@ -233,7 +237,7 @@ namespace roversaigotchi {
         basic.showIcon(IconNames.Heart)
         basic.pause(2000)
         music.stopAllSounds()
-        changeWellbeing(20)
+        changeWellbeing(effect)
         _busy = false
     }
 
