@@ -135,7 +135,7 @@ namespace roversaigotchi {
 
         // Rocking motion before lullaby — motors must be stopped before audio starts
         // to avoid electrical interference causing static in the speaker
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 2; i++) {
             roversa.forward()
             basic.pause(500)
             roversa.stop()
@@ -264,13 +264,13 @@ namespace roversaigotchi {
 
     export function _playLullaby(): void {
         music.playMelody(
-            "E4:1 -:1 E4:1 -:1 G4:4 -:4 " +
-            "E4:1 -:1 E4:1 -:1 G4:4 -:4 " +
-            "E4:1 -:1 G4:1 -:1 C5:2 -:2 B4:2 -:2 A4:2 -:2 A4:2 -:2 G4:4 " +
-            "D4:1 -:1 E4:1 -:1 F4:2 -:2 D4:2 -:2 " +
-            "D4:1 -:1 E4:1 -:1 F4:2 -:2 D4:2 -:2 " +
-            "F4:1 -:1 B4:1 -:1 A4:1 -:1 G4:2 -:2 B4:2 -:1 C5:4",
-            100
+            "E4:1 E4:1 G4:4 " +
+            "E4:1 E4:1 G4:4 " +
+            "E4:1 G4:1 C5:2 B4:2 A4:2 A4:2 G4:4 " +
+            "D4:1 E4:1 F4:2 D4:2 " +
+            "D4:1 E4:1 F4:2 D4:2 " +
+            "F4:1 B4:1 A4:1 G4:2 B4:2 C5:4",
+            60
         )
     }
 }
