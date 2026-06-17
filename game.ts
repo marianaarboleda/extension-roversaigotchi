@@ -41,7 +41,7 @@ namespace roversaigotchi {
      * Surviving a wave: wellbeing +1. Getting hit: wellbeing –10.
      * Returns automatically when the game ends.
      */
-    //% block="play obstacle game"
+    //% block="play obstacle game || with effects %effect_win_level|%effect_lose" --- IGNORE ---"
     //% weight=70
     //% group="Behaviors"
     //% effect_win_level.defl=1
