@@ -186,7 +186,7 @@ namespace roversaigotchi {
         )
 
         for (let i = 0; i < 4; i++) {
-            roversa.driveForwards(randint(1000, 4000, 500))
+            roversa.driveForwards(randint(1000, 4000))
             if (Math.randomBoolean()) {
                 roversa.right()
             } else {
