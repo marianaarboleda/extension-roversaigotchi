@@ -132,13 +132,10 @@ namespace roversaigotchi {
         _busy = true
         _sleeping = true
         basic.showIcon(IconNames.Asleep)
-        music.setVolume(127)
 
-      
-        // Lullaby loops until turn upside down sets _sleeping = false
-        while (_sleeping) {
-            _playLullaby()
-              // Rocking motion
+        // Rocking motion before lullaby — motors must be stopped before audio starts
+        // to avoid electrical interference causing static in the speaker
+        for (let i = 0; i < 5; i++) {
             roversa.forward()
             basic.pause(500)
             roversa.stop()
@@ -146,6 +143,12 @@ namespace roversaigotchi {
             roversa.backward()
             basic.pause(500)
             roversa.stop()
+        }
+
+        music.setVolume(127)
+        // Lullaby loops until turn upside down sets _sleeping = false
+        while (_sleeping) {
+            _playLullaby()
         }
 
         // Wake-up sequence
@@ -186,7 +189,7 @@ namespace roversaigotchi {
         )
 
         for (let i = 0; i < 4; i++) {
-            roversa.driveForwards(randint(1000, 4000))
+            roversa.driveForwards(randint(500, 1500))
             if (Math.randomBoolean()) {
                 roversa.right()
             } else {
