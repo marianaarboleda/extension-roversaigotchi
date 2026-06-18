@@ -12,6 +12,7 @@ namespace roversai {
     let _wakeHandler: (() => void) | null = null
     let _friendHandler: (() => void) | null = null
     let _radioTick = 0
+    let _radioGroup = 0
 
     // ── Startup registrations ─────────────────────────────────────────────────
 
@@ -67,7 +68,8 @@ namespace roversai {
     //% group="Setup"
     //% radioGroup.defl=0
     export function start(radioGroup = 0): void {
-        radio.setGroup(radioGroup > 0 ? radioGroup : randint(1, 6))
+        _radioGroup = radioGroup
+        radio.setGroup(_radioGroup > 0 ? _radioGroup : randint(1, 6))
         // Background loop: updates the display and decays wellbeing every 2 s.
         // Pauses automatically while any behavior is running (_busy = true).
         control.inBackground(function () {
@@ -83,6 +85,17 @@ namespace roversai {
                 basic.pause(2000)
             }
         })
+    }
+
+    /**
+     * The pet's current radio group (1–6). Pets will only detect friends on the same group.
+     * Set this at the start or change it later with radio.setGroup() blocks.
+     */
+    //% block="radio group"
+    //% weight=95
+    //% group="Setup"
+    export function getRadioGroup(): number {
+        return _radioGroup
     }
 
     // ── Display ───────────────────────────────────────────────────────────────
