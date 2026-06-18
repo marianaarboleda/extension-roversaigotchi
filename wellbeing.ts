@@ -45,7 +45,12 @@ namespace roversai {
     }
 
     // Internal: called every 2 s by the background loop in behaviors.ts
-    export function _decayWellbeing(): void {
-        _wellbeing = Math.max(0, _wellbeing - 1)
+    export function _idleWellbeing(_idleimpact: number): void {
+        if (_idleimpact < 0) {
+            _wellbeing = Math.max(0, _wellbeing + _idleimpact)
+        }
+        else if (_idleimpact > 0 && _wellbeing < 100) {
+            _wellbeing = Math.min(100, _wellbeing + _idleimpact)
+        }
     }
 }
