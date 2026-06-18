@@ -67,9 +67,9 @@ namespace roversai {
     //% weight=100
     //% group="Setup"
     //% radioGroup.defl=0
-    //% idleImpact.defl=-1
+    //% idleImpact.defl=null
     //% time.defl=2
-    export function start(radioGroup = 0, idleImpact = -1, time = 2): void {
+    export function start(radioGroup = 0, idleImpact = null, time = 2): void {
         _radioGroup = radioGroup
         if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)
@@ -85,7 +85,11 @@ namespace roversai {
                         radio.sendString("hey!")     // broadcast every 10 s
                     }
                     showFace()
-                    _idleWellbeing(idleImpact)
+                    if (idleImpact == null) {
+                        _idleWellbeing(-1)  // default wellbeing decay of –1 every 2 s
+                    } else {
+                        _idleWellbeing(idleImpact)
+                    }
                 }
                 basic.pause(time * 1000)
             }
