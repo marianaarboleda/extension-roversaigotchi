@@ -49,7 +49,7 @@ namespace roversai {
         if (_idleimpact < 0) {
             _wellbeing = Math.max(0, _wellbeing + _idleimpact)
         }
-        else if (_idleimpact > 0 && _wellbeing < 100) {
+        else if (_idleimpact >= 0 && _wellbeing < 100) {
             _wellbeing = Math.min(100, _wellbeing + _idleimpact)
         }
     }
