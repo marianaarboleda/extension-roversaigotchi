@@ -63,12 +63,13 @@ namespace roversai {
      * Start the pet. Call this once in "on start".
      * Sets the radio group and launches the background display loop.
      */
-    //% block="start roversai || on radio group %radioGroup | with idle wellbeing impact %idleImpact"
+    //% block="start roversai || on radio group %radioGroup | with idle wellbeing impact %idleImpact | every %time seconds"
     //% weight=100
     //% group="Setup"
     //% radioGroup.defl=0
     //% idleImpact.defl=-1
-    export function start(radioGroup = 0, idleImpact = -1): void {
+    //% time.defl=2
+    export function start(radioGroup = 0, idleImpact = -1, time = 2): void {
         _radioGroup = radioGroup
         if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)
@@ -86,7 +87,7 @@ namespace roversai {
                     showFace()
                     _idleWellbeing(idleImpact)
                 }
-                basic.pause(2000)
+                basic.pause(time * 1000)
             }
         })
     }
