@@ -231,6 +231,47 @@ namespace roversaigotchi {
         _busy = false
     }
 
+    /**
+     * Simulate scrolling social media. Rapid pings and flashing icons
+     * overstimulate the pet, draining wellbeing.
+     */
+    //% block="scroll social media || with effect %effect"
+    //% weight=70
+    //% group="Behaviors"
+    //% effect.defl=-15
+    export function scrollSocialMedia(effect = -15): void {
+        _busy = true
+        music.setVolume(200)
+
+        const icons = [
+            IconNames.Heart, IconNames.Silly, IconNames.Angry,
+            IconNames.Surprised, IconNames.Happy, IconNames.Skull,
+            IconNames.Diamond, IconNames.Ghost
+        ]
+
+        for (let i = 0; i < 8; i++) {
+            basic.showIcon(icons[randint(0, icons.length - 1)])
+            music.play(
+                music.builtInPlayableMelody(Melodies.BaDing),
+                music.PlaybackMode.UntilDone
+            )
+            // Random twitch
+            if (Math.randomBoolean()) {
+                roversa.driveForwards(randint(50, 150))
+            } else {
+                roversa.right()
+                basic.pause(100)
+                roversa.stop()
+            }
+        }
+
+        basic.clearScreen()
+        roversa.stop()
+        music.stopAllSounds()
+        changeWellbeing(effect)
+        _busy = false
+    }
+
     // ── Event hooks ───────────────────────────────────────────────────────────
 
     /**
