@@ -5,8 +5,7 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "roversa": "github:eb8ga/pxt-roversa-2#v1.0.29",
-        "states": "github:hovavo/pxt-states#v2.1.0"
+        "roversa": "github:eb8ga/pxt-roversa-2#v1.0.29"
     },
     "files": [
         "main.blocks",
