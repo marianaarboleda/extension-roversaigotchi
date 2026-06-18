@@ -69,7 +69,7 @@ namespace roversai {
     //% radioGroup.defl=0
     export function start(radioGroup = 0): void {
         _radioGroup = radioGroup
-        if _radioGroup == 0 {
+        if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)
         }
         radio.setGroup(_radioGroup)
