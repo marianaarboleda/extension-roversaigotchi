@@ -5,7 +5,7 @@
  * Each behavior sets _busy = true while it runs so the background
  * display loop pauses automatically without any extra wiring.
  */
-namespace roversaigotchi {
+namespace roversai {
 
     // Custom event handlers – students can override defaults with
     // onCustomWake() and onFriendNearby() blocks.
@@ -62,7 +62,7 @@ namespace roversaigotchi {
      * Start the pet. Call this once in "on start".
      * Sets the radio group and launches the background display loop.
      */
-    //% block="start roversaigotchi"
+    //% block="start roversai"
     //% weight=100
     //% group="Setup"
     export function start(): void {

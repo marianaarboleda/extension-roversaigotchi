@@ -3,9 +3,9 @@
  * This file declares all shared state and the wellbeing system.
  * It must be listed first in pxt.json so other files can reference these exports.
  */
-//% color=#E83562 icon="\uf1b0" block="Roversaigotchi"
+//% color=#E83562 icon="\uf1b0" block="Roversai"
 //% groups=["Setup", "Wellbeing", "Behaviors", "Events"]
-namespace roversaigotchi {
+namespace roversai {
 
     // ── Shared state ──────────────────────────────────────────────────────────
     // Exported so game.ts and behaviors.ts can read/write them directly.
