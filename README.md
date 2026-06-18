@@ -26,7 +26,7 @@ To edit this repository in MakeCode.
 
 ## Student project template
 
-```typescript
+```block
 // ── on start ──────────────────────────────────────────────────────────────
 roversaigotchi.start()
 
