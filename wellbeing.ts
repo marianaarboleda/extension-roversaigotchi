@@ -5,6 +5,10 @@
  */
 //% color=#E83562 icon="\uf1b0" block="Roversai"
 //% groups=["Setup", "Wellbeing", "Behaviors", "Events"]
+//% group.Setup.weight=100
+//% group.Wellbeing.weight=80
+//% group.Behaviors.weight=60
+//% group.Events.weight=40
 namespace roversai {
 
     // ── Shared state ──────────────────────────────────────────────────────────
