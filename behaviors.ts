@@ -235,7 +235,7 @@ namespace roversaigotchi {
      * Simulate scrolling social media. Rapid pings and flashing icons
      * overstimulate the pet, draining wellbeing.
      */
-    //% block="scroll social media || with effect %effect"
+    //% block="scroll social media %effect|effect"
     //% weight=70
     //% group="Behaviors"
     //% effect.defl=-15
