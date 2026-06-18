@@ -63,13 +63,16 @@ namespace roversai {
      * Start the pet. Call this once in "on start".
      * Sets the radio group and launches the background display loop.
      */
-    //% block="start roversai on radio group %radioGroup"
+    //% block="start roversai || on radio group %radioGroup"
     //% weight=100
     //% group="Setup"
     //% radioGroup.defl=0
     export function start(radioGroup = 0): void {
         _radioGroup = radioGroup
-        radio.setGroup(_radioGroup > 0 ? _radioGroup : randint(1, 6))
+        if _radioGroup == 0 {
+            _radioGroup = randint(1, 6)
+        }
+        radio.setGroup(_radioGroup)
         // Background loop: updates the display and decays wellbeing every 2 s.
         // Pauses automatically while any behavior is running (_busy = true).
         control.inBackground(function () {
