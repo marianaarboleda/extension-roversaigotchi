@@ -105,11 +105,11 @@ namespace roversai {
     // ── Display ───────────────────────────────────────────────────────────────
 
     export function showFace(): void {
-        if (_wellbeing < 50) {
+        if (_wellbeing < 20) {
             basic.showIcon(IconNames.Angry)
-        } else if (_wellbeing < 70) {
+        } else if (_wellbeing < 50) {
             basic.showIcon(IconNames.Sad)
-        } else if (_wellbeing < 80) {
+        } else if (_wellbeing < 75) {
             basic.showLeds(`
                 . . . . .
                 . # . # .
@@ -130,7 +130,8 @@ namespace roversai {
     //% group="Wellbeing"
     export function showStats(): void {
         _busy = true
-        led.plotBarGraph(_wellbeing, 100)
+        // led.plotBarGraph(_wellbeing, 100)
+        basic.showNumber(_wellbeing)
         basic.pause(3000)
         basic.clearScreen()
         _busy = false
@@ -155,13 +156,14 @@ namespace roversai {
         // Lullaby loops until turn upside down sets _sleeping = false
         while (_sleeping) {
             _playLullaby()
-            roversa.forward()
-            basic.pause(500)
-            roversa.stop()
-            basic.pause(500)
-            roversa.backward()
-            basic.pause(500)
-            roversa.stop()
+            // roversa can rock back and forth while the lullaby plays
+            // roversa.forward()
+            // basic.pause(500)
+            // roversa.stop()
+            // basic.pause(500)
+            // roversa.backward()
+            // basic.pause(500)
+            // roversa.stop()
         }
 
         // Wake-up sequence
@@ -229,8 +231,8 @@ namespace roversai {
     //% block="text a friend || with effect %effect"
     //% weight=75
     //% group="Behaviors"
-    //% effect.defl=15
-    export function textFriend(effect = 15): void {
+    //% effect.defl=30
+    export function textFriend(effect = 30): void {
         _busy = true
         music.setVolume(255)
         basic.showString("Hello!")
@@ -261,14 +263,19 @@ namespace roversai {
         _busy = true
         music.setVolume(200)
 
-        const icons = [
-            IconNames.Heart, IconNames.Silly, IconNames.Angry,
-            IconNames.Surprised, IconNames.Happy, IconNames.Skull,
-            IconNames.Diamond, IconNames.Ghost
+        // const icons = [
+        //     IconNames.Heart, IconNames.Silly, IconNames.Angry,
+        //     IconNames.Surprised, IconNames.Happy, IconNames.Skull,
+        //     IconNames.Diamond, IconNames.Ghost
+        // ]
+        const texts = [
+            "Like!", "50% OFF", "Follow!", "Share!", "GRWM",
+            "LOL", "OMG", "Wow!", "VIRAL!", "FLASH NEWS!",
+            "#trending"
         ]
 
         for (let i = 0; i < 8; i++) {
-            basic.showIcon(icons[randint(0, icons.length - 1)])
+            basic.showString(texts[randint(0, texts.length - 1)])
             music.play(
                 music.builtInPlayableMelody(Melodies.BaDing),
                 music.PlaybackMode.UntilDone
