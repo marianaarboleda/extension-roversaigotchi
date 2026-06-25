@@ -11,7 +11,6 @@ namespace roversai {
     // onCustomWake() and onFriendNearby() blocks.
     let _wakeHandler: (() => void) | null = null
     let _friendHandler: (() => void) | null = null
-    let _radioTick = 0
     let _radioGroup = 0
 
     // ── Startup registrations ─────────────────────────────────────────────────
@@ -80,10 +79,6 @@ namespace roversai {
         control.inBackground(function () {
             while (true) {
                 if (!_busy) {
-                    _radioTick += 1
-                    if (_radioTick % 5 == 0) {
-                        radio.sendString("hey!")     // broadcast every 10 s
-                    }
                     showFace()
                     if (idleImpact == null) {
                         _idleWellbeing(-1)  // default wellbeing decay of –1 every 2 s
@@ -291,6 +286,31 @@ namespace roversai {
         basic.clearScreen()
         roversa.stop()
         music.stopAllSounds()
+        changeWellbeing(effect)
+        _busy = false
+    }
+
+    /**
+     * Reach out to a nearby friend via radio. Plays a searching animation
+     * and sends a signal — a nearby pet will react if they receive it.
+     */
+    //% block="seek a friend || with effect %effect"
+    //% weight=65
+    //% group="Behaviors"
+    //% effect.defl=5
+    export function seekFriend(effect = 5): void {
+        _busy = true
+        music.setVolume(180)
+        for (let i = 0; i < 3; i++) {
+            basic.showIcon(IconNames.EigthNote)
+            basic.pause(300)
+            basic.showIcon(IconNames.QuarterNote)
+            basic.pause(300)
+        }
+        radio.sendString("hey!")
+        basic.showIcon(IconNames.target)
+        basic.pause(1000)
+        basic.clearScreen()
         changeWellbeing(effect)
         _busy = false
     }
