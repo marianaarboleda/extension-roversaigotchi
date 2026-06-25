@@ -68,7 +68,7 @@ namespace roversai {
     //% radioGroup.defl=0
     //% idleImpact.defl=null
     //% time.defl=2
-    export function start(radioGroup = 0, idleImpact = null, time = 2): void {
+    export function start(radioGroup = 0, idleImpact:number = null, time = 2): void {
         _radioGroup = radioGroup
         if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)
