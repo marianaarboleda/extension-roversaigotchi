@@ -255,13 +255,15 @@ namespace roversai {
      * Simulate scrolling social media. Rapid pings and flashing icons
      * overstimulate the pet, draining wellbeing.
      */
-    //% block="scroll social media %effect|effect"
+    //% block="scroll social media || with effect %effect"
     //% weight=70
     //% group="Behaviors"
-    //% effect.defl=-15
-    export function scrollSocialMedia(effect = -15): void {
+    //% effect.defl=null
+    export function scrollSocialMedia(effect: number = null): void {
         _busy = true
         music.setVolume(200)
+        if (effect == null) {
+            effect = -15}
 
         // const icons = [
         //     IconNames.Heart, IconNames.Silly, IconNames.Angry,
