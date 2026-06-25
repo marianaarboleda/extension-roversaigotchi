@@ -308,7 +308,7 @@ namespace roversai {
             basic.pause(300)
         }
         radio.sendString("hey!")
-        basic.showIcon(IconNames.target)
+        basic.showIcon(IconNames.Target)
         basic.pause(1000)
         basic.clearScreen()
         changeWellbeing(effect)
