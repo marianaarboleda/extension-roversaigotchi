@@ -6,7 +6,7 @@
  * Students can also register their own A/B handlers — MakeCode runs all
  * registered handlers for the same event, so there is no conflict.
  */
-namespace roversai {
+namespace roversaPetBot {
 
     let _birdX = 2
     let _obstacleY = 4

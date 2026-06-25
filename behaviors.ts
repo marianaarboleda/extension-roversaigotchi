@@ -5,7 +5,7 @@
  * Each behavior sets _busy = true while it runs so the background
  * display loop pauses automatically without any extra wiring.
  */
-namespace roversai {
+namespace roversaPetBot {
 
     // Custom event handlers – students can override defaults with
     // onCustomWake() and onFriendNearby() blocks.
@@ -62,7 +62,7 @@ namespace roversai {
      * Start the pet. Call this once in "on start".
      * Sets the radio group and launches the background display loop.
      */
-    //% block="start roversai || on radio group %radioGroup | with idle wellbeing impact %idleImpact | every %time seconds"
+    //% block="start roversaPetBot || on radio group %radioGroup | with idle wellbeing impact %idleImpact | every %time seconds"
     //% weight=100
     //% group="Setup"
     //% radioGroup.defl=0

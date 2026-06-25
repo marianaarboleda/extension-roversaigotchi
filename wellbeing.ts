@@ -3,13 +3,13 @@
  * This file declares all shared state and the wellbeing system.
  * It must be listed first in pxt.json so other files can reference these exports.
  */
-//% color=#E83562 icon="\uf1b0" block="Roversai"
+//% color=#E83562 icon="\uf1b0" block="Roversa PetBot"
 //% groups=["Setup", "Wellbeing", "Behaviors", "Events"]
 //% group.Setup.weight=100
 //% group.Wellbeing.weight=80
 //% group.Behaviors.weight=60
 //% group.Events.weight=40
-namespace roversai {
+namespace roversaPetBot {
 
     // ── Shared state ──────────────────────────────────────────────────────────
     // Exported so game.ts and behaviors.ts can read/write them directly.

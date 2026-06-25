@@ -26,48 +26,53 @@ To edit this repository in MakeCode.
 
 ## Student project template
 
-```block
-// ── on start ──────────────────────────────────────────────────────────────
-roversaigotchi.start()
+```typescript
+roversaPetBot.start()
 
-// ── button / pin wiring  (students choose what triggers what) ─────────────
-roversa.onEvent(RoversaPin.P15, RoversaEvent.Click, function () {
-    roversaigotchi.playGame()
-})
 roversa.onEvent(RoversaPin.P16, RoversaEvent.Click, function () {
-    roversaigotchi.goSleep()
+    roversaPetBot.playGame(1, -10)
 })
-roversa.onEvent(RoversaPin.P8, RoversaEvent.Click, function () {
-    roversaigotchi.goRun()
+roversa.onEvent(RoversaPin.P13, RoversaEvent.Click, function () {
+    roversaPetBot.goRun()
 })
 roversa.onEvent(RoversaPin.P14, RoversaEvent.Click, function () {
-    roversaigotchi.textFriend()
+    roversaPetBot.goSleep()
+})
+roversa.onEvent(RoversaPin.P15, RoversaEvent.Click, function () {
+    roversaPetBot.textFriend()
+})
+roversa.onEvent(RoversaPin.P9, RoversaEvent.Click, function () {
+    roversaPetBot.scrollSocialMedia()
+})
+roversa.onEvent(RoversaPin.P8, RoversaEvent.Click, function () {
+    roversaPetBot.seekFriend()
 })
 roversa.onEvent(RoversaPin.P5, RoversaEvent.Click, function () {
-    roversaigotchi.showStats()
+    roversaPetBot.showStats()
 })
 ```
 
 ## Available blocks
 
-| Group      | Block                      | Description                                  |
-|------------|----------------------------|----------------------------------------------|
-| Setup      | `start roversaigotchi`     | Initializes radio and the background loop    |
-| Wellbeing  | `wellbeing`                | Returns current wellbeing (0–100)            |
-| Wellbeing  | `change wellbeing by N`    | Adds/subtracts from wellbeing (clamped 0–100)|
-| Behaviors  | `play obstacle game`       | Runs the mini-game (A = left, B = right)     |
-| Behaviors  | `go to sleep`              | Lullaby loop — shake to wake                 |
-| Behaviors  | `go for a run`             | Random driving + wellbeing boost             |
-| Behaviors  | `text a friend`            | Ringtone + heart animation + wellbeing boost |
-| Behaviors  | `show pet face`            | Displays mood icon based on wellbeing        |
-| Behaviors  | `show wellbeing stats`     | Bar graph of wellbeing for 3 s               |
-| Events     | `on shake`                 | Custom shake handler (replaces angry default)|
-| Events     | `on friend nearby`         | Custom radio friend handler                  |
+| Group     | Block                    | Description                                           |
+|-----------|--------------------------|-------------------------------------------------------|
+| Setup     | `start roversai`         | Initializes radio and the background loop             |
+| Wellbeing | `wellbeing`              | Returns current wellbeing (0–100)                     |
+| Wellbeing | `change wellbeing by N`  | Adds/subtracts from wellbeing (clamped 0–100)         |
+| Wellbeing | `show wellbeing stats`   | Bar graph of wellbeing for 3 s                        |
+| Behaviors | `go to sleep`            | Lullaby loop — shake to wake                          |
+| Behaviors | `go for a run`           | Random driving to upbeat music                        |
+| Behaviors | `text a friend`          | Ringtone + heart animation                            |
+| Behaviors | `scroll social media`    | Chaotic flashing icons + pings — overstimulating      |
+| Behaviors | `seek a friend`          | Broadcasts a radio signal to nearby pets              |
+| Behaviors | `play obstacle game`     | Dodge rising obstacles (A = left, B = right)          |
+| Events    | `on wake`                | Custom handler when turned upside down (not asleep)   |
+| Events    | `on friend nearby`       | Custom handler when a nearby pet sends a signal       |
 
 ## File structure
 
 ```
-roversaigotchi/
+extension-roversaigotchi/
 ├── pxt.json        extension manifest and dependencies
 ├── wellbeing.ts    shared state variables + wellbeing blocks  (loaded first)
 ├── game.ts         obstacle mini-game + button A/B handlers
@@ -76,7 +81,7 @@ roversaigotchi/
 
 ## Creating a new personality
 
-To create a different personality (e.g. `spacegotchi`):
+To create a different personality:
 
 1. Fork this repo and rename it
 2. Replace the behavior implementations in `behaviors.ts` with new animations,
@@ -84,5 +89,4 @@ To create a different personality (e.g. `spacegotchi`):
 3. Keep the same exported function names so lesson plan projects are compatible
 4. Update the namespace name, color, and icon in `wellbeing.ts`
 
-Students import the new extension — the blocks look identical, the pet behaves
-differently.
+Students import the new extension — the blocks look identical, the pet behaves differently.

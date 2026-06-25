@@ -1,5 +1,5 @@
 {
-    "name": "pxt-roversAI",
+    "name": "pxt-roversa-petbot",
     "description": "",
     "dependencies": {
         "core": "*",

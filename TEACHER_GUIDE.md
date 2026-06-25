@@ -1,8 +1,8 @@
-# Roversai – Teacher Guide
+# Roversa PetBot – Teacher Guide
 
 ## What is this?
 
-Roversai is a MakeCode extension for the micro:bit v2 + Roversa robot. It turns the robot into a digital pet — a Tamagotchi-like character with a **wellbeing score** (0–100) that goes up and down depending on what the student programs it to do.
+Roversa PetBot is a MakeCode extension for the micro:bit v2 + Roversa robot. It turns the robot into a digital pet — a Tamagotchi-like character with a **wellbeing score** (0–100) that goes up and down depending on what the student programs it to do.
 
 The goal is to give students a tangible, physical way to explore how different activities affect wellbeing, and to introduce sequencing, events, and cause-and-effect in programming.
 
@@ -37,24 +37,24 @@ Flash the following starter code onto each micro:bit before the lesson. Students
 
 ```block
 roversa.onEvent(RoversaPin.P16, RoversaEvent.Click, function () {
-    roversai.playGame(1, -10)
+    roversaPetBot.playGame(1, -10)
 })
 roversa.onEvent(RoversaPin.P9, RoversaEvent.Click, function () {
-    roversai.scrollSocialMedia(-15)
+    roversaPetBot.scrollSocialMedia(-15)
 })
 roversa.onEvent(RoversaPin.P13, RoversaEvent.Click, function () {
-    roversai.goRun()
+    roversaPetBot.goRun()
 })
 roversa.onEvent(RoversaPin.P14, RoversaEvent.Click, function () {
-    roversai.goSleep()
+    roversaPetBot.goSleep()
 })
 roversa.onEvent(RoversaPin.P5, RoversaEvent.Click, function () {
-    roversai.showStats()
+    roversaPetBot.showStats()
 })
 roversa.onEvent(RoversaPin.P15, RoversaEvent.Click, function () {
-    roversai.textFriend()
+    roversaPetBot.textFriend()
 })
-roversai.start()
+roversaPetBot.start()
 ```
 
 ### Button map for students
@@ -123,7 +123,7 @@ Examples students can try:
 | `play obstacle game` | Behaviors | Dodge rising obstacles. A = left, B = right. |
 | `show wellbeing stats` | Wellbeing | Bar graph of current wellbeing for 3 seconds. |
 | `on wake` | Events | Replace the default angry reaction when the micro:bit is turned upside down. |
-| `on friend nearby` | Events | Replace the default reaction when another Roversai pet is detected via radio. |
+| `on friend nearby` | Events | Replace the default reaction when another Roversa PetBot pet is detected via radio. |
 
 ---
 
@@ -136,7 +136,7 @@ Make sure `start roversai` is called in "on start". Without it, the background l
 The shake gesture only wakes the pet if `go to sleep` is currently running. It won't do anything if the pet isn't asleep.
 
 **Two pets react to each other.**
-That's the radio feature working. Pets broadcast a signal every 10 seconds — if another Roversai is nearby, both pets play the friend reaction. This is intentional.
+That's the radio feature working. Pets broadcast a signal every 10 seconds — if another Roversa PetBot is nearby, both pets play the friend reaction. This is intentional.
 
 **The game never ends.**
 The game ends when the pet gets hit by an obstacle. Keep playing until a collision happens.
