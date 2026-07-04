@@ -7,32 +7,29 @@
  */
 namespace roversaPetBot {
 
-    // Custom event handlers – students can override defaults with
-    // onCustomWake() and onFriendNearby() blocks.
-    let _wakeHandler: (() => void) | null = null
+    // Custom event handler – students can override the default friend
+    // reaction with the onFriendNearby() block.
     let _friendHandler: (() => void) | null = null
     let _radioGroup = 0
 
     // ── Startup registrations ─────────────────────────────────────────────────
 
-    // Turn upside down: wake the pet if asleep, otherwise run the default angry reaction
-    // (or a custom handler if the student provided one).
+    // Turn upside down: run the default angry reaction (or a custom handler if
+    // the student provided one). Waking a sleeping pet is NOT handled here — that
+    // is isolated in the wakeUp() block so teachers can pick their own trigger.
     input.onGesture(Gesture.ScreenDown, function () {
         if (_sleeping) {
-            _sleeping = false          // interrupts the lullaby loop in goSleep()
-        } else if (_wakeHandler) {
-            _wakeHandler()
-        } else {
-            // Default: angry reaction
-            music.play(
-                music.builtInPlayableMelody(Melodies.Dadadadum),
-                music.PlaybackMode.InBackground
-            )
-            music.setVolume(255)
-            changeWellbeing(-10)
-            basic.showIcon(IconNames.Angry)
-            basic.pause(1000)
+            return                     // ignore while asleep; only wakeUp() ends sleep
         }
+        // Angry reaction when turned upside down while awake
+        music.play(
+            music.builtInPlayableMelody(Melodies.Dadadadum),
+            music.PlaybackMode.InBackground
+        )
+        music.setVolume(255)
+        changeWellbeing(-10)
+        basic.showIcon(IconNames.Angry)
+        basic.pause(1000)
     })
 
     // Radio: detect a nearby friend (signal strength > –80 filters for proximity)
@@ -67,8 +64,8 @@ namespace roversaPetBot {
     //% group="Setup"
     //% radioGroup.defl=0
     //% idleImpact.defl=null
-    //% time.defl=2
-    export function start(radioGroup = 0, idleImpact:number = null, time = 2): void {
+    //% time.defl=10
+    export function start(radioGroup = 0, idleImpact:number = null, time = 10): void {
         _radioGroup = radioGroup
         if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)
@@ -150,12 +147,12 @@ namespace roversaPetBot {
     export function goSleep(effect = 20): void {
         _busy = true
         _sleeping = true
-        basic.showIcon(IconNames.Asleep)
-
         music.setVolume(127)
-        // Lullaby loops until turn upside down sets _sleeping = false
+        _playLullaby()
+        // based on feedback: lullaby plays only once. We show sleeping face until waking up motion sets _sleeping = false
         while (_sleeping) {
-            _playLullaby()
+            basic.showIcon(IconNames.Asleep)
+            
             // roversa can rock back and forth while the lullaby plays
             // roversa.forward()
             // basic.pause(500)
@@ -166,19 +163,44 @@ namespace roversaPetBot {
             // roversa.stop()
         }
 
-        // Wake-up sequence
+        // Wake-up sequence: blink the eyes open and closed
         music.stopAllSounds()
         music.setVolume(0)
         roversa.stop()
         for (let i = 0; i < 3; i++) {
-            basic.pause(500)
-            basic.showIcon(IconNames.Confused)
-            basic.pause(500)
-            basic.showIcon(IconNames.Asleep)
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                # # . # #
+                . . . . .
+                . . . . .
+                `)                      // eyes closed
+            basic.pause(400)
+            basic.showLeds(`
+                . . . . .
+                # # . # #
+                # # . # #
+                . . . . .
+                . . . . .
+                `)                      // eyes open
+            basic.pause(400)
         }
 
         changeWellbeing(effect)
         _busy = false
+    }
+
+    /**
+     * Wake the pet up if it is sleeping.
+     * Wire this to whatever button or motion you want to use as the wake-up trigger
+     * (for example a shake gesture, a button press, or turning the micro:bit over).
+     * Does nothing if the pet is already awake.
+     */
+    //% block="wake up pet"
+    //% weight=85
+    //% group="Behaviors"
+    export function wakeUp(): void {
+        _sleeping = false   // interrupts the sleep loop in goSleep()
     }
 
     /**
@@ -276,20 +298,12 @@ namespace roversaPetBot {
             "#trending"
         ]
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 2; i++) {
             basic.showString(texts[randint(0, texts.length - 1)])
             music.play(
                 music.builtInPlayableMelody(Melodies.BaDing),
                 music.PlaybackMode.UntilDone
             )
-            // Random twitch
-            if (Math.randomBoolean()) {
-                roversa.driveForwards(randint(50, 150))
-            } else {
-                roversa.right()
-                basic.pause(100)
-                roversa.stop()
-            }
         }
 
         basic.clearScreen()
@@ -325,17 +339,6 @@ namespace roversaPetBot {
     }
 
     // ── Event hooks ───────────────────────────────────────────────────────────
-
-    /**
-     * Run custom code when the micro:bit is turned upside down (and the pet is not asleep).
-     * Replaces the default angry reaction.
-     */
-    //% block="on wake"
-    //% weight=90
-    //% group="Events"
-    export function onCustomWake(handler: () => void): void {
-        _wakeHandler = handler
-    }
 
     /**
      * Run custom code when a friend's pet is detected nearby via radio.

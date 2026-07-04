@@ -56,17 +56,17 @@ roversa.onEvent(RoversaPin.P5, RoversaEvent.Click, function () {
 
 | Group     | Block                    | Description                                           |
 |-----------|--------------------------|-------------------------------------------------------|
-| Setup     | `start roversai`         | Initializes radio and the background loop             |
+| Setup     | `start roversaPetBot`    | Initializes radio and the background loop             |
 | Wellbeing | `wellbeing`              | Returns current wellbeing (0–100)                     |
 | Wellbeing | `change wellbeing by N`  | Adds/subtracts from wellbeing (clamped 0–100)         |
-| Wellbeing | `show wellbeing stats`   | Bar graph of wellbeing for 3 s                        |
-| Behaviors | `go to sleep`            | Lullaby loop — shake to wake                          |
+| Wellbeing | `show wellbeing stats`   | Shows the current wellbeing number for 3 s            |
+| Behaviors | `go to sleep`            | Plays a lullaby, then sleeps until `wake up pet`      |
+| Behaviors | `wake up pet`            | Wakes a sleeping pet — wire to any button or motion   |
 | Behaviors | `go for a run`           | Random driving to upbeat music                        |
 | Behaviors | `text a friend`          | Ringtone + heart animation                            |
 | Behaviors | `scroll social media`    | Chaotic flashing icons + pings — overstimulating      |
 | Behaviors | `seek a friend`          | Broadcasts a radio signal to nearby pets              |
 | Behaviors | `play obstacle game`     | Dodge rising obstacles (A = left, B = right)          |
-| Events    | `on wake`                | Custom handler when turned upside down (not asleep)   |
 | Events    | `on friend nearby`       | Custom handler when a nearby pet sends a signal       |
 
 ## File structure
