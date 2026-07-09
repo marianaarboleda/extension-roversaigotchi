@@ -177,19 +177,6 @@ namespace roversaPetBot {
         music.setVolume(0)
         roversa.stop()
         start_time = 400
-        for (let i = 0; i < 4; i++) {
-            basic.showIcon(IconNames.Asleep)                      // eyes closed
-            basic.pause(start_time - i*50)
-            basic.showLeds(`
-                . . . . .
-                . # . # .
-                . . . . .
-                . # # # .
-                . . . . .
-                `)                      // eyes open
-            basic.pause(start_time - i*50)
-        }
-
         _busy = false
     }
 
@@ -199,12 +186,35 @@ namespace roversaPetBot {
      * (for example a shake gesture, a button press, or turning the micro:bit over).
      * Does nothing if the pet is already awake.
      */
-    //% block="wake up pet || with effect %effect"
+    //% block="wake up pet || with effect %effect || how %emotion"
     //% weight=85
     //% group="Behaviors"
     //% effect.defl=0
-    export function wakeUp(effect = 0): void {
+    //% emotion.defl="neutral"
+    export function wakeUp(effect = 0, emotion = "neutral"): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
+        
+        for (let i = 0; i < 4; i++) {
+            basic.showIcon(IconNames.Asleep)                      // eyes closed
+            basic.pause(start_time - i*50)
+            switch (emotion) {
+            case 'angry': basic.showIcon(IconNames.Angry);
+                break;
+            case 'happy': basic.showIcon(IconNames.Happy);
+                break;
+            case 'surprised': basic.showIcon(IconNames.Surprised);
+                break;
+            case 'neutral':  basic.showLeds(`
+                . . . . .
+                . # . # .
+                . . . . .
+                . # # # .
+                . . . . .
+                `)   
+        }                 // eyes open
+            basic.pause(start_time - i*50)
+        }
+
         changeWellbeing(effect)
 
     }
