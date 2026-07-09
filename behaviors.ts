@@ -191,6 +191,8 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=0
     //% emotion.defl="neutral"
+    //% emotion.fieldEditor="gridpicker"
+    //% emotion.fieldOptions.items="neutral, happy, surprised, angry"
     export function wakeUp(effect = 0, emotion = "neutral"): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
         
