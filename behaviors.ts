@@ -131,7 +131,7 @@ namespace roversaPetBot {
         _sleeping = true
         music.setVolume(127)
         // show a few blinks before the lullaby starts
-        start_time = 400
+        let start_time = 400
         for (let i = 0; i < 2; i++) {
             basic.showLeds(`
                 . . . . .
@@ -176,7 +176,6 @@ namespace roversaPetBot {
         music.stopAllSounds()
         music.setVolume(0)
         roversa.stop()
-        start_time = 400
         _busy = false
     }
 
@@ -195,7 +194,7 @@ namespace roversaPetBot {
     //% emotion.fieldOptions.items="neutral, happy, surprised, angry"
     export function wakeUp(effect = 0, emotion = "neutral"): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
-        
+        let start_time = 400
         for (let i = 0; i < 4; i++) {
             basic.showIcon(IconNames.Asleep)                      // eyes closed
             basic.pause(start_time - i*50)
