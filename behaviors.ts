@@ -192,11 +192,11 @@ namespace roversaPetBot {
      * (for example a shake gesture, a button press, or turning the micro:bit over).
      * Does nothing if the pet is already awake.
      */
-    //% block="wake up pet || with effect %effect || how %emotion"
+    //% block="wake up pet || with effect %effect | how %emotion"
     //% weight=85
     //% group="Behaviors"
     //% effect.defl=0
-    //% emotion.defl=null
+    //% emotion.defl=Emotion.Neutral
     export function wakeUp(effect = 0, emotion: Emotion = Emotion.Neutral): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
         let start_time = 400
