@@ -189,12 +189,13 @@ namespace roversaPetBot {
     //% weight=85
     //% group="Behaviors"
     //% effect.defl=0
-    //% emotion.defl="neutral"
+    //% emotion.defl=null
     //% emotion.fieldEditor="gridpicker"
     //% emotion.fieldOptions.items="neutral, happy, surprised, angry"
-    export function wakeUp(effect = 0, emotion = "neutral"): void {
+    export function wakeUp(effect = 0, emotion: string = null): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
         let start_time = 400
+        if (emotion == null) {emotion = 'neutral'}
         for (let i = 0; i < 4; i++) {
             basic.showIcon(IconNames.Asleep)                      // eyes closed
             basic.pause(start_time - i*50)
