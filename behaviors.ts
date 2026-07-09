@@ -14,24 +14,6 @@ namespace roversaPetBot {
 
     // ── Startup registrations ─────────────────────────────────────────────────
 
-    // Turn upside down: run the default angry reaction (or a custom handler if
-    // the student provided one). Waking a sleeping pet is NOT handled here — that
-    // is isolated in the wakeUp() block so teachers can pick their own trigger.
-    input.onGesture(Gesture.ScreenDown, function () {
-        if (_sleeping) {
-            return                     // ignore while asleep; only wakeUp() ends sleep
-        }
-        // Angry reaction when turned upside down while awake
-        music.play(
-            music.builtInPlayableMelody(Melodies.Dadadadum),
-            music.PlaybackMode.InBackground
-        )
-        music.setVolume(255)
-        changeWellbeing(-10)
-        basic.showIcon(IconNames.Angry)
-        basic.pause(1000)
-    })
-
     // Radio: detect a nearby friend (signal strength > –80 filters for proximity)
     radio.onReceivedString(function (receivedString: string) {
         if (!_busy && radio.receivedPacket(RadioPacketProperty.SignalStrength) > -80) {
@@ -148,7 +130,34 @@ namespace roversaPetBot {
         _busy = true
         _sleeping = true
         music.setVolume(127)
+        // show a few blinks before the lullaby starts
+        start_time = 400
+        for (let i = 0; i < 2; i++) {
+            basic.showLeds(`
+                . . . . .
+                . # . # .
+                . . . . .
+                . # # # .
+                . . . . .
+                `)                      // eyes open
+            basic.pause(start_time + i*50)
+            basic.showIcon(IconNames.Asleep)                      // eyes closed
+            basic.pause(start_time + i*50)
+        }   
         _playLullaby()
+        for (let i = 2; i < 4; i++) {
+            basic.showLeds(`
+                . . . . .
+                . # . # .
+                . . . . .
+                . # # # .
+                . . . . .
+                `)                      // eyes open
+            basic.pause(start_time + i*50)
+            basic.showIcon(IconNames.Asleep)                      // eyes closed
+            basic.pause(start_time + i*50)
+        }  
+        changeWellbeing(effect)
         // based on feedback: lullaby plays only once. We show sleeping face until waking up motion sets _sleeping = false
         while (_sleeping) {
             basic.showIcon(IconNames.Asleep)
@@ -167,26 +176,20 @@ namespace roversaPetBot {
         music.stopAllSounds()
         music.setVolume(0)
         roversa.stop()
-        for (let i = 0; i < 3; i++) {
+        start_time = 400
+        for (let i = 0; i < 4; i++) {
+            basic.showIcon(IconNames.Asleep)                      // eyes closed
+            basic.pause(start_time - i*50)
             basic.showLeds(`
                 . . . . .
+                . # . # .
                 . . . . .
-                # # . # #
-                . . . . .
-                . . . . .
-                `)                      // eyes closed
-            basic.pause(400)
-            basic.showLeds(`
-                . . . . .
-                # # . # #
-                # # . # #
-                . . . . .
+                . # # # .
                 . . . . .
                 `)                      // eyes open
-            basic.pause(400)
+            basic.pause(start_time - i*50)
         }
 
-        changeWellbeing(effect)
         _busy = false
     }
 
@@ -196,11 +199,14 @@ namespace roversaPetBot {
      * (for example a shake gesture, a button press, or turning the micro:bit over).
      * Does nothing if the pet is already awake.
      */
-    //% block="wake up pet"
+    //% block="wake up pet || with effect %effect"
     //% weight=85
     //% group="Behaviors"
-    export function wakeUp(): void {
+    //% effect.defl=0
+    export function wakeUp(effect = 0): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
+        changeWellbeing(effect)
+
     }
 
     /**
