@@ -5,6 +5,21 @@
  * Each behavior sets _busy = true while it runs so the background
  * display loop pauses automatically without any extra wiring.
  */
+
+enum Emotion {
+    //% block="Neutral"
+    Neutral,
+
+    //% block="Happy"
+    Happy,
+
+    //% block="Surprised"
+    Surprised,
+
+    //% block="Angry"
+    Angry
+}
+
 namespace roversaPetBot {
 
     // Custom event handler – students can override the default friend
@@ -126,6 +141,8 @@ namespace roversaPetBot {
     //% weight=90
     //% group="Behaviors"
     //% effect.defl=20
+    //% effect.min=-100 effect.max=100
+
     export function goSleep(effect = 20): void {
         _busy = true
         _sleeping = true
@@ -179,13 +196,6 @@ namespace roversaPetBot {
         _busy = false
     }
 
-    enum Emotion {
-        Neutral,
-        Happy,
-        Surprised,
-        Angry
-    }
-
     /**
      * Wake the pet up if it is sleeping.
      * Wire this to whatever button or motion you want to use as the wake-up trigger
@@ -196,8 +206,9 @@ namespace roversaPetBot {
     //% weight=85
     //% group="Behaviors"
     //% effect.defl=0
+    //% effect.min=-100 effect.max=100
     //% emotion.defl=Emotion.Neutral
-    export function wakeUp(effect = 0, emotion: Emotion = Emotion.Neutral): void {
+    export function wakeUp(effect = 0, emotion?:Emotion): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
         let start_time = 400
         if (emotion == null) {emotion = Emotion.Neutral}
