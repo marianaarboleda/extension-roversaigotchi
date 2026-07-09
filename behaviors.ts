@@ -179,6 +179,13 @@ namespace roversaPetBot {
         _busy = false
     }
 
+    enum Emotion {
+        Neutral,
+        Happy,
+        Surprised,
+        Angry
+    }
+
     /**
      * Wake the pet up if it is sleeping.
      * Wire this to whatever button or motion you want to use as the wake-up trigger
@@ -190,23 +197,21 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=0
     //% emotion.defl=null
-    //% emotion.fieldEditor="gridpicker"
-    //% emotion.fieldOptions.items="neutral, happy, surprised, angry"
-    export function wakeUp(effect = 0, emotion: string = null): void {
+    export function wakeUp(effect = 0, emotion: Emotion = Emotion.Neutral): void {
         _sleeping = false   // interrupts the sleep loop in goSleep()
         let start_time = 400
-        if (emotion == null) {emotion = 'neutral'}
+        if (emotion == null) {emotion = Emotion.Neutral}
         for (let i = 0; i < 4; i++) {
             basic.showIcon(IconNames.Asleep)                      // eyes closed
             basic.pause(start_time - i*50)
             switch (emotion) {
-            case 'angry': basic.showIcon(IconNames.Angry);
+            case Emotion.Angry: basic.showIcon(IconNames.Angry);
                 break;
-            case 'happy': basic.showIcon(IconNames.Happy);
+            case Emotion.Happy: basic.showIcon(IconNames.Happy);
                 break;
-            case 'surprised': basic.showIcon(IconNames.Surprised);
+            case Emotion.Surprised: basic.showIcon(IconNames.Surprised);
                 break;
-            case 'neutral':  basic.showLeds(`
+            case Emotion.Neutral:  basic.showLeds(`
                 . . . . .
                 . # . # .
                 . . . . .
