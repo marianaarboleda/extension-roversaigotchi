@@ -48,6 +48,9 @@ roversa.onEvent(RoversaPin.P13, RoversaEvent.Click, function () {
 roversa.onEvent(RoversaPin.P14, RoversaEvent.Click, function () {
     roversaPetBot.goSleep()
 })
+input.onGesture(Gesture.Shake, function () {
+    roversaPetBot.wakeUp()
+})
 roversa.onEvent(RoversaPin.P5, RoversaEvent.Click, function () {
     roversaPetBot.showStats()
 })
@@ -57,6 +60,8 @@ roversa.onEvent(RoversaPin.P15, RoversaEvent.Click, function () {
 roversaPetBot.start()
 ```
 
+> **Note:** Waking the pet is now a separate block (`wake up pet`). The starter code above wires it to a **shake** gesture, but you can choose any button or motion. If you don't wire a wake trigger, a sleeping pet will never wake up.
+
 ### Button map for students
 
 | Button | Activity |
@@ -64,8 +69,9 @@ roversaPetBot.start()
 | P16 | Play a game |
 | P9 | Scroll social media |
 | P13 | Go for a run |
-| P14 | Go to sleep (shake to wake up) |
-| P5 | Show wellbeing bar |
+| P14 | Go to sleep |
+| Shake | Wake the pet up |
+| P5 | Show wellbeing number |
 | P15 | Text a friend |
 
 ### What each activity does
@@ -75,9 +81,10 @@ roversaPetBot.start()
 | **Play a game** | +1 per wave survived, −10 on hit | Dodge obstacles — A moves left, B moves right |
 | **Scroll social media** | −15 | Rapid flashing icons + notification sounds — chaotic, overstimulating |
 | **Go for a run** | +10 | Drives around randomly to upbeat music |
-| **Go to sleep** | +20 on wake | Plays a lullaby and rocks — shake the micro:bit to wake it up |
+| **Go to sleep** | +20 on wake | Plays a lullaby, then sleeps until woken. Blinks its eyes open when it wakes |
+| **Wake the pet up** | — | Ends sleep. Wire it to any button or motion you like (starter code uses shake) |
 | **Text a friend** | +15 | Plays a ringtone and shows a heart |
-| **Show stats** | — | Displays a bar graph of the current wellbeing level for 3 seconds |
+| **Show stats** | — | Displays the current wellbeing number for 3 seconds |
 
 ### Discussion questions
 
@@ -113,16 +120,17 @@ Examples students can try:
 
 | Block | Group | Description |
 |-------|-------|-------------|
-| `start roversai` | Setup | Must be called once in "on start". Starts the background loop and radio. |
+| `start roversaPetBot` | Setup | Must be called once in "on start". Starts the background loop and radio. |
 | `wellbeing` | Wellbeing | Returns the current wellbeing value (0–100). Use inside conditions. |
 | `change wellbeing by N` | Wellbeing | Directly adds or subtracts from wellbeing. Useful for custom events. |
-| `go to sleep` | Behaviors | Lullaby loop + rocking. Shake the micro:bit to wake the pet. |
+| `show wellbeing stats` | Wellbeing | Shows the current wellbeing number for 3 seconds. |
+| `go to sleep` | Behaviors | Plays a lullaby, then sleeps until `wake up pet` is called. Blinks its eyes open on waking. |
+| `wake up pet` | Behaviors | Ends sleep. Wire it to any button or motion. Does nothing if the pet is already awake. |
 | `go for a run` | Behaviors | Random driving to upbeat music. |
 | `text a friend` | Behaviors | Ringtone + heart animation. |
 | `scroll social media` | Behaviors | Rapid flashing icons + notification pings. Overstimulating. |
+| `seek a friend` | Behaviors | Broadcasts a radio signal so a nearby pet can react. |
 | `play obstacle game` | Behaviors | Dodge rising obstacles. A = left, B = right. |
-| `show wellbeing stats` | Wellbeing | Bar graph of current wellbeing for 3 seconds. |
-| `on wake` | Events | Replace the default angry reaction when the micro:bit is turned upside down. |
 | `on friend nearby` | Events | Replace the default reaction when another Roversa PetBot pet is detected via radio. |
 
 ---
@@ -130,10 +138,10 @@ Examples students can try:
 ## Tips and troubleshooting
 
 **The pet's face doesn't change.**
-Make sure `start roversai` is called in "on start". Without it, the background loop doesn't run.
+Make sure `start roversaPetBot` is called in "on start". Without it, the background loop doesn't run.
 
-**Shaking doesn't wake the pet.**
-The shake gesture only wakes the pet if `go to sleep` is currently running. It won't do anything if the pet isn't asleep.
+**The pet won't wake up / is stuck asleep.**
+Waking is a separate `wake up pet` block — it must be wired to a button or motion. Check that a trigger (e.g. the shake gesture in the starter code) calls `wake up pet`. Without a wake trigger, a sleeping pet stays asleep forever.
 
 **Two pets react to each other.**
 That's the radio feature working. Pets broadcast a signal every 10 seconds — if another Roversa PetBot is nearby, both pets play the friend reaction. This is intentional.
