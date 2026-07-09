@@ -1,0 +1,22 @@
+{
+    "name": "roversa-petbot-blocks-demo",
+    "description": "Behind-the-scenes BLOCKS version of the Roversa PetBot — the same pet rebuilt out of standard MakeCode blocks so teachers can see how each behavior works and invent their own.",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "roversa": "github:eb8ga/pxt-roversa-2#v1.0.29"
+    },
+    "files": [
+        "main.ts",
+        "README.md"
+    ],
+    "targetVersions": {
+        "target": "8.0.22",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
