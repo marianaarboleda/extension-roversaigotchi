@@ -208,33 +208,35 @@ namespace roversaPetBot {
     //% effect.defl=0
     //% effect.min=-100 effect.max=100
     //% emotion.defl=Emotion.Neutral
-    export function wakeUp(effect = 0, emotion?:Emotion): void {
-        _sleeping = false   // interrupts the sleep loop in goSleep()
-        let start_time = 400
-        if (emotion == null) {emotion = Emotion.Neutral}
-        for (let i = 0; i < 4; i++) {
-            basic.showIcon(IconNames.Asleep)                      // eyes closed
-            basic.pause(start_time - i*50)
-            switch (emotion) {
-            case Emotion.Angry: basic.showIcon(IconNames.Angry);
-                break;
-            case Emotion.Happy: basic.showIcon(IconNames.Happy);
-                break;
-            case Emotion.Surprised: basic.showIcon(IconNames.Surprised);
-                break;
-            case Emotion.Neutral:  basic.showLeds(`
-                . . . . .
-                . # . # .
-                . . . . .
-                . # # # .
-                . . . . .
-                `)   
-        }                 // eyes open
-            basic.pause(start_time - i*50)
+    export function wakeUp(effect = 0, emotion?: Emotion): void {
+        if (_sleeping) {
+            _sleeping = false   // interrupts the sleep loop in goSleep()
+            let start_time = 400
+            if (emotion == null) { emotion = Emotion.Neutral }
+            for (let i = 0; i < 4; i++) {
+                basic.showIcon(IconNames.Asleep)                      // eyes closed
+                basic.pause(start_time - i * 50)
+                switch (emotion) {
+                    case Emotion.Angry: basic.showIcon(IconNames.Angry);
+                        break;
+                    case Emotion.Happy: basic.showIcon(IconNames.Happy);
+                        break;
+                    case Emotion.Surprised: basic.showIcon(IconNames.Surprised);
+                        break;
+                    case Emotion.Neutral: basic.showLeds(`
+                    . . . . .
+                    . # . # .
+                    . . . . .
+                    . # # # .
+                    . . . . .
+                    `)
+                }                 // eyes open
+                basic.pause(start_time - i * 50)
+            }
+
+            changeWellbeing(effect)
+
         }
-
-        changeWellbeing(effect)
-
     }
 
     /**
