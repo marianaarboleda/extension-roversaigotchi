@@ -41,23 +41,23 @@ namespace roversaPetBot {
      * Surviving a wave: wellbeing +1. Getting hit: wellbeing –10.
      * Returns automatically when the game ends.
      */
-    //% block="play obstacle game || with effects %effect_win_level|%effect_lose" --- IGNORE ---"
+    //% block="play obstacle game || with effects %effect_win_level|%effect_lose" 
     //% weight=70
     //% group="Behaviors"
     //% effect_win_level.defl=1
-    //% effect_lose.defl=-2
-    export function playGame(effect_win_level = 1, effect_lose = -2): void {
+    //% effect_lose.defl=0
+    export function playGame(effect_win_level = 1, effect_lose = 0): void {
         _busy = true
         _gameRunning = true
         _birdX = 2
         _obstacleY = 4
         _gapX = randint(0, 4)
-        game_speed = 700
-        _levels = 0
+        let _game_speed = 700
+        let _levels = 0
 
         while (_gameRunning) {
             _drawGame()
-            basic.pause(game_speed)
+            basic.pause(_game_speed)
             _obstacleY -= 1
 
             if (_obstacleY == 0) {
@@ -71,7 +71,7 @@ namespace roversaPetBot {
                     changeWellbeing(effect_win_level)
                     _obstacleY = 4
                     _gapX = randint(0, 4)
-                    game_speed -= 5  // Increase difficulty
+                    _game_speed -= 5  // Increase difficulty
                     _levels += 1
                 }
             }
