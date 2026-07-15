@@ -42,12 +42,12 @@ namespace roversaPetBot {
      * After 5 waves, wellbeing decreases by 2 for each additional wave survived.
      * Returns automatically when the game ends.
      */
-    //% block="play obstacle game || with effects %effect_win_level|%effect_lose" 
+    //% block="play obstacle game with %wellbeing_impact impact on wellbeing || and %effect_win_level per survived wave"
     //% weight=70
     //% group="Behaviors"
     //% effect_win_level.defl=1
-    //% effect_lose.defl=null
-    export function playGame(effect_win_level = 1, effect_lose:number = null): void {
+    //% wellbeing_impact.min=-100 wellbeing_impact.max=100
+    export function playGame(wellbeing_impact:number=0, effect_win_level = 1): void {
         _busy = true
         _gameRunning = true
         _birdX = 2
@@ -55,8 +55,8 @@ namespace roversaPetBot {
         _gapX = randint(0, 4)
         let _game_speed = 700
         let _levels = 0
-        if (effect_lose == null) {
-            effect_lose = -2
+        if (wellbeing_impact == null) {
+            wellbeing_impact = -2
         }
 
         while (_gameRunning) {
@@ -81,7 +81,7 @@ namespace roversaPetBot {
             }
         }
         if (_levels > 5){
-            changeWellbeing(effect_lose*(_levels-5))  // longer play, more decrease in wellbeing
+            changeWellbeing(wellbeing_impact*(_levels-5))  // longer play, more decrease in wellbeing
         }
         basic.clearScreen()
         _busy = false
