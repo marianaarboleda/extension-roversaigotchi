@@ -38,15 +38,16 @@ namespace roversaPetBot {
     /**
      * Run the obstacle mini-game. The pet dodges rising obstacle rows.
      * Press A to move left, B to move right.
-     * Surviving a wave: wellbeing +1. Getting hit: wellbeing –10.
+     * Surviving a wave: wellbeing +1.
+     * After 5 waves, wellbeing decreases by 2 for each additional wave survived.
      * Returns automatically when the game ends.
      */
     //% block="play obstacle game || with effects %effect_win_level|%effect_lose" 
     //% weight=70
     //% group="Behaviors"
     //% effect_win_level.defl=1
-    //% effect_lose.defl=0
-    export function playGame(effect_win_level = 1, effect_lose = 0): void {
+    //% effect_lose.defl=null
+    export function playGame(effect_win_level = 1, effect_lose:number = null): void {
         _busy = true
         _gameRunning = true
         _birdX = 2
@@ -54,6 +55,9 @@ namespace roversaPetBot {
         _gapX = randint(0, 4)
         let _game_speed = 700
         let _levels = 0
+        if (effect_lose == null) {
+            effect_lose = -2
+        }
 
         while (_gameRunning) {
             _drawGame()
