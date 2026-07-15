@@ -71,7 +71,7 @@ namespace roversaPetBot {
                     changeWellbeing(effect_win_level)
                     _obstacleY = 4
                     _gapX = randint(0, 4)
-                    _game_speed -= 5  // Increase difficulty
+                    _game_speed -= 20  // Increase difficulty
                     _levels += 1
                 }
             }
