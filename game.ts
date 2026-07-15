@@ -45,17 +45,19 @@ namespace roversaPetBot {
     //% weight=70
     //% group="Behaviors"
     //% effect_win_level.defl=1
-    //% effect_lose.defl=-10
-    export function playGame(effect_win_level = 1, effect_lose = -10): void {
+    //% effect_lose.defl=-2
+    export function playGame(effect_win_level = 1, effect_lose = -2): void {
         _busy = true
         _gameRunning = true
         _birdX = 2
         _obstacleY = 4
         _gapX = randint(0, 4)
+        game_speed = 700
+        _levels = 0
 
         while (_gameRunning) {
             _drawGame()
-            basic.pause(700)
+            basic.pause(game_speed)
             _obstacleY -= 1
 
             if (_obstacleY == 0) {
@@ -64,16 +66,19 @@ namespace roversaPetBot {
                     _gameRunning = false
                     basic.clearScreen()
                     basic.showString("GAME OVER")
-                    changeWellbeing(effect_lose)
                 } else {
                     // Survived this wave – spawn next
                     changeWellbeing(effect_win_level)
                     _obstacleY = 4
                     _gapX = randint(0, 4)
+                    game_speed -= 5  // Increase difficulty
+                    _levels += 1
                 }
             }
         }
-
+        if (_levels > 5){
+            changeWellbeing(effect_lose*(_levels-5))  // longer play, more decrease in wellbeing
+        }
         basic.clearScreen()
         _busy = false
     }
