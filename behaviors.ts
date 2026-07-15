@@ -61,8 +61,8 @@ namespace roversaPetBot {
     //% group="Setup"
     //% radioGroup.defl=0
     //% idleImpact.defl=null
-    //% time.defl=10
-    export function start(radioGroup = 0, idleImpact:number = null, time = 10): void {
+    //% time.defl=5
+    export function start(radioGroup = 0, idleImpact:number = null, time = 5): void {
         _radioGroup = radioGroup
         if (_radioGroup == 0) {
             _radioGroup = randint(1, 6)

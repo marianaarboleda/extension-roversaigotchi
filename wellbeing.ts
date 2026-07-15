@@ -15,7 +15,7 @@ namespace roversaPetBot {
     // Exported so game.ts and behaviors.ts can read/write them directly.
     // The leading underscore signals "internal – not a student block."
 
-    export let _wellbeing = 50   // 0–100
+    export let _wellbeing = 45   // 0–100
     export let _busy = false     // true while any behavior is running
     export let _sleeping = false // true while the pet is asleep
     export let _gameRunning = false
