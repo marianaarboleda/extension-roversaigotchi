@@ -365,7 +365,7 @@ namespace roversaPetBot {
             "#trending"
         ]
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 1; i++) {
             basic.showString(texts[randint(0, texts.length - 1)])
             music.play(
                 music.builtInPlayableMelody(Melodies.BaDing),
@@ -374,6 +374,7 @@ namespace roversaPetBot {
         }
 
         basic.clearScreen()
+        basic.showIcon(IconNames.Skull)
         roversa.stop()
         music.stopAllSounds()
         changeWellbeing(effect)
