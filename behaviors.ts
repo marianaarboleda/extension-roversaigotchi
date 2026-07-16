@@ -309,6 +309,33 @@ namespace roversaPetBot {
         _busy = false
     }
 
+
+    /**
+     * Meet with a friend. Play a happy melody, do a happy dance and giggle.
+     * Affects wellbeing     */
+    //% block="meet a friend || with effect %effect"
+    //% weight=75
+    //% group="Behaviors"
+    //% effect.defl=30
+    export function meetFriend(effect=30): void {
+        _busy = true
+        music.setVolume(255)
+        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
+        roversa.turnRight(30)
+        for (let index = 0; index < 4; index++) {
+            roversa.turnLeft(60)
+            roversa.turnRight(60)
+        }
+        roversa.turnLeft(30)
+        basic.showIcon(IconNames.Heart)
+        basic.pause(1000)
+        music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)
+        changeWellbeing(30)
+        music.stopAllSounds()
+        _busy = false
+    }
+
+
     /**
      * Simulate scrolling social media. Rapid pings and flashing icons
      * overstimulate the pet, draining wellbeing.
