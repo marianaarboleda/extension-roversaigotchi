@@ -289,8 +289,8 @@ namespace roversaPetBot {
     //% block="text a friend || with effect %effect"
     //% weight=75
     //% group="Behaviors"
-    //% effect.defl=30
-    export function textFriend(effect = 30): void {
+    //% effect.defl=10
+    export function textFriend(effect = 10): void {
         _busy = true
         music.setVolume(255)
         basic.showString("Hello!")
@@ -302,7 +302,7 @@ namespace roversaPetBot {
             music.builtInPlayableMelody(Melodies.Ringtone),
             music.PlaybackMode.InBackground
         )
-        basic.showIcon(IconNames.Heart)
+        basic.showIcon(IconNames.SmallHeart)
         basic.pause(2000)
         music.stopAllSounds()
         changeWellbeing(effect)
