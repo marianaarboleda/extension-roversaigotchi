@@ -318,22 +318,26 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=30
     export function meetFriend(effect=30): void {
-        _busy = true
-        music.setVolume(255)
-        music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
-        roversa.turnRight(30)
-        for (let index = 0; index < 4; index++) {
-            roversa.turnLeft(60)
-            roversa.turnRight(60)
+        if (_gameRunning == false){
+            _busy = true
+            music.setVolume(255)
+            music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
+            roversa.turnRight(30)
+            for (let index = 0; index < 4; index++) {
+                roversa.turnLeft(60)
+                roversa.turnRight(60)
+            }
+            roversa.turnLeft(30)
+            basic.showIcon(IconNames.Heart)
+            basic.pause(1000)
+            music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)
+            changeWellbeing(30)
+            music.stopAllSounds()
+            _busy = false
         }
-        roversa.turnLeft(30)
-        basic.showIcon(IconNames.Heart)
-        basic.pause(1000)
-        music.play(music.builtinPlayableSoundEffect(soundExpression.giggle), music.PlaybackMode.UntilDone)
-        changeWellbeing(30)
-        music.stopAllSounds()
-        _busy = false
-    }
+
+        }
+       
 
 
     /**
