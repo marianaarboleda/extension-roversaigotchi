@@ -249,12 +249,12 @@ namespace roversaPetBot {
     export function goRun(effect = 10): void {
         _busy = true
 
-        for (let i = 0; i < 2; i++) {
-            basic.showIcon(IconNames.Heart)
-            basic.pause(500)
-            basic.showIcon(IconNames.SmallHeart)
-            basic.pause(500)
-        }
+        // for (let i = 0; i < 2; i++) {
+        //     basic.showIcon(IconNames.Heart)
+        //     basic.pause(500)
+        //     basic.showIcon(IconNames.SmallHeart)
+        //     basic.pause(500)
+        // }
 
         music.play(
             music.builtInPlayableMelody(Melodies.Chase),
@@ -262,7 +262,7 @@ namespace roversaPetBot {
         )
 
         for (let i = 0; i < 4; i++) {
-            roversa.driveForwards(randint(500, 1500))
+            roversa.driveForwards(randint(50, 350))
             if (Math.randomBoolean()) {
                 roversa.right()
             } else {
