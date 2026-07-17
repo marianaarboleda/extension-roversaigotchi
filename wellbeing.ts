@@ -44,7 +44,7 @@ namespace roversaPetBot {
         _wellbeing = Math.max(0, Math.min(100, _wellbeing + amount))
     }
 
-    // Internal: called every 2 s by the background loop in behaviors.ts
+    // Internal: called by the background loop in behaviors.ts
     export function _idleWellbeing(_idleimpact: number): void {
         if (_idleimpact < 0) {
             _wellbeing = Math.max(0, _wellbeing + _idleimpact)
