@@ -307,8 +307,7 @@ namespace roversaPetBot {
                 "Konnichiwa"
             ]
             basic.showString("" + (greetings._pickRandom()))
-            music.play(music.builtInPlayableMelody(Melodies.Ringtone), 
-            music.PlaybackMode.UntilDone)
+            music.play(music.builtInPlayableMelody(Melodies.Ringtone), music.PlaybackMode.UntilDone)
             basic.showIcon(IconNames.SmallHeart)
             basic.pause(2000)
             music.stopAllSounds()
