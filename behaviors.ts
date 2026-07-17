@@ -123,13 +123,14 @@ namespace roversaPetBot {
     //% weight=50
     //% group="Wellbeing"
     export function showStats(): void {
+        if (!_busy) {
         _busy = true
         // led.plotBarGraph(_wellbeing, 100)
         basic.showNumber(_wellbeing)
         basic.pause(3000)
         basic.clearScreen()
         _busy = false
-    }
+    }}
 
     // ── Behaviors ─────────────────────────────────────────────────────────────
 
@@ -144,58 +145,58 @@ namespace roversaPetBot {
     //% effect.min=-100 effect.max=100
 
     export function goSleep(effect = 20): void {
-        if (_gameRunning == false) {
-        _busy = true
-        _sleeping = true
-        music.setVolume(127)
-        // show a few blinks before the lullaby starts
-        let start_time = 400
-        for (let i = 0; i < 2; i++) {
-            basic.showLeds(`
-                . . . . .
-                . # . # .
-                . . . . .
-                . # # # .
-                . . . . .
-                `)                      // eyes open
-            basic.pause(start_time + i*50)
-            basic.showIcon(IconNames.Asleep)                      // eyes closed
-            basic.pause(start_time + i*50)
-        }   
-        _playLullaby()
-        for (let i = 2; i < 4; i++) {
-            basic.showLeds(`
-                . . . . .
-                . # . # .
-                . . . . .
-                . # # # .
-                . . . . .
-                `)                      // eyes open
-            basic.pause(start_time + i*50)
-            basic.showIcon(IconNames.Asleep)                      // eyes closed
-            basic.pause(start_time + i*50)
-        }  
-        changeWellbeing(effect)
-        // based on feedback: lullaby plays only once. We show sleeping face until waking up motion sets _sleeping = false
-        while (_sleeping) {
-            basic.showIcon(IconNames.Asleep)
-            
-            // roversa can rock back and forth while the lullaby plays
-            // roversa.forward()
-            // basic.pause(500)
-            // roversa.stop()
-            // basic.pause(500)
-            // roversa.backward()
-            // basic.pause(500)
-            // roversa.stop()
-        }
+        if (!_busy) {
+            _busy = true
+            _sleeping = true
+            music.setVolume(127)
+            // show a few blinks before the lullaby starts
+            let start_time = 400
+            for (let i = 0; i < 2; i++) {
+                basic.showLeds(`
+                    . . . . .
+                    . # . # .
+                    . . . . .
+                    . # # # .
+                    . . . . .
+                    `)                      // eyes open
+                basic.pause(start_time + i*50)
+                basic.showIcon(IconNames.Asleep)                      // eyes closed
+                basic.pause(start_time + i*50)
+            }   
+            _playLullaby()
+            for (let i = 2; i < 4; i++) {
+                basic.showLeds(`
+                    . . . . .
+                    . # . # .
+                    . . . . .
+                    . # # # .
+                    . . . . .
+                    `)                      // eyes open
+                basic.pause(start_time + i*50)
+                basic.showIcon(IconNames.Asleep)                      // eyes closed
+                basic.pause(start_time + i*50)
+            }  
+            changeWellbeing(effect)
+            // based on feedback: lullaby plays only once. We show sleeping face until waking up motion sets _sleeping = false
+            while (_sleeping) {
+                basic.showIcon(IconNames.Asleep)
+                
+                // roversa can rock back and forth while the lullaby plays
+                // roversa.forward()
+                // basic.pause(500)
+                // roversa.stop()
+                // basic.pause(500)
+                // roversa.backward()
+                // basic.pause(500)
+                // roversa.stop()
+            }
 
         // Wake-up sequence: blink the eyes open and closed
         music.stopAllSounds()
         music.setVolume(0)
         roversa.stop()
         _busy = false
-    }
+        }
     }
 
     /**
@@ -249,7 +250,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=10
     export function goRun(effect = 10): void {
-        if (_gameRunning == false) {
+        if (!_busy) {
         _busy = true
 
         // for (let i = 0; i < 2; i++) {
@@ -294,7 +295,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=10
     export function textFriend(effect = 10): void {
-        if (_gameRunning == false) {
+        if (!_busy) {
             _busy = true
             let greetings = [
                 "Hello friend!",
@@ -325,7 +326,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=30
     export function meetFriend(effect=30): void {
-        if (_gameRunning == false){
+        if (!_busy) {
             _busy = true
             music.setVolume(255)
             music._playDefaultBackground(music.builtInPlayableMelody(Melodies.Entertainer), music.PlaybackMode.InBackground)
@@ -356,7 +357,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=null
     export function scrollSocialMedia(effect: number = null): void {
-        if (_gameRunning == false) {
+        if (!_busy) {
         _busy = true
         music.setVolume(200)
         if (effect == null) {
@@ -400,7 +401,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=5
     export function seekFriend(effect = 5): void {
-        if (_gameRunning == false) {
+        if (!_busy) {
         _busy = true
         music.setVolume(180)
         for (let i = 0; i < 3; i++) {

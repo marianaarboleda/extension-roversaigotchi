@@ -48,6 +48,7 @@ namespace roversaPetBot {
     //% effect_win_level.defl=1
     //% wellbeing_impact.min=-100 wellbeing_impact.max=100
     export function playGame(wellbeing_impact:number=0, effect_win_level = 1): void {
+        if (!_busy) {
         _busy = true
         _gameRunning = true
         _birdX = 2
@@ -85,5 +86,6 @@ namespace roversaPetBot {
         }
         basic.clearScreen()
         _busy = false
+    }
     }
 }
