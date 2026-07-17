@@ -144,6 +144,7 @@ namespace roversaPetBot {
     //% effect.min=-100 effect.max=100
 
     export function goSleep(effect = 20): void {
+        if (_gameRunning == false) {
         _busy = true
         _sleeping = true
         music.setVolume(127)
@@ -194,6 +195,7 @@ namespace roversaPetBot {
         music.setVolume(0)
         roversa.stop()
         _busy = false
+    }
     }
 
     /**
@@ -247,6 +249,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=10
     export function goRun(effect = 10): void {
+        if (_gameRunning == false) {
         _busy = true
 
         // for (let i = 0; i < 2; i++) {
@@ -281,7 +284,7 @@ namespace roversaPetBot {
 
         changeWellbeing(effect)
         _busy = false
-    }
+    }}
 
     /**
      * Send a message to a friend. Plays a ringtone and affects wellbeing.
@@ -291,6 +294,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=10
     export function textFriend(effect = 10): void {
+        if (_gameRunning == false) {
         _busy = true
         music.setVolume(255)
         basic.showString("Hello!")
@@ -307,6 +311,7 @@ namespace roversaPetBot {
         music.stopAllSounds()
         changeWellbeing(effect)
         _busy = false
+    }
     }
 
 
@@ -349,6 +354,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=null
     export function scrollSocialMedia(effect: number = null): void {
+        if (_gameRunning == false) {
         _busy = true
         music.setVolume(200)
         if (effect == null) {
@@ -380,6 +386,8 @@ namespace roversaPetBot {
         changeWellbeing(effect)
         _busy = false
     }
+    }
+
 
     /**
      * Reach out to a nearby friend via radio. Plays a searching animation
@@ -390,6 +398,7 @@ namespace roversaPetBot {
     //% group="Behaviors"
     //% effect.defl=5
     export function seekFriend(effect = 5): void {
+        if (_gameRunning == false) {
         _busy = true
         music.setVolume(180)
         for (let i = 0; i < 3; i++) {
@@ -404,6 +413,7 @@ namespace roversaPetBot {
         basic.clearScreen()
         changeWellbeing(effect)
         _busy = false
+    }
     }
 
     // ── Event hooks ───────────────────────────────────────────────────────────
