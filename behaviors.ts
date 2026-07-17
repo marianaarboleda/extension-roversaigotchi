@@ -295,22 +295,23 @@ namespace roversaPetBot {
     //% effect.defl=10
     export function textFriend(effect = 10): void {
         if (_gameRunning == false) {
-        _busy = true
-        music.setVolume(255)
-        basic.showString("Hello!")
-        roversa.turnRight(45)
-        roversa.backward()
-        roversa.turnLeft(45)
-        basic.showString(". . .")
-        music.play(
-            music.builtInPlayableMelody(Melodies.Ringtone),
-            music.PlaybackMode.InBackground
-        )
-        basic.showIcon(IconNames.SmallHeart)
-        basic.pause(2000)
-        music.stopAllSounds()
-        changeWellbeing(effect)
-        _busy = false
+            _busy = true
+            let greetings = [
+                "Hello friend!",
+                "Hola!",
+                "Hey!",
+                "Hallo, mein freund!",
+                "Ciao",
+                "Bonjour",
+                "Konnichiwa"
+            ]
+            basic.showString("" + (greetings._pickRandom()))
+            music.play(music.builtInPlayableMelody(Melodies.Ringtone), music.PlaybackMode.InBackground)
+            basic.showIcon(IconNames.SmallHeart)
+            basic.pause(2000)
+            music.stopAllSounds()
+            changeWellbeing(effect)
+            _busy = false
     }
     }
 
